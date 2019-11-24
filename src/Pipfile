@@ -1,0 +1,20 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+ibm-watson = "*"
+ibm-cloud-sdk-core = "*"
+wave = "*"
+configparser = "*"
+auto-py-to-exe = "*"
+speechrecognition = "*"
+pyaudio = {path = "./PyAudio-0.2.11-cp37-cp37m-win_amd64.whl"}
+googletrans = "*"
+setuptools = "*"
+
+[requires]
+python_version = "3.7"

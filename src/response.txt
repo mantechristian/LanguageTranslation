@@ -1,0 +1,36 @@
+Watson
+{'results': 
+    [
+        {
+            'word_alternatives': 
+                [
+                    {
+                        'start_time': 0.03, 'alternatives': 
+                            [
+                                {'confidence': 1.0, 'word': 'おはよう'}
+                            ], 
+                        'end_time': 0.62
+                    }
+                ], 
+            'alternatives': 
+                [
+                    {
+                        'confidence': 0.78, 'transcript': 'おはよう ございます '
+                    }
+                ], 
+            'final': True
+        }
+    ], 
+            'result_index': 0
+}
+
+
+GOOGLE
+{'alternative': 
+    [
+        {
+            'transcript': 'good morning', 'confidence': 0.98762906
+        }
+    ], 
+    'final': True
+}
