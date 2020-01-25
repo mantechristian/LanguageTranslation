@@ -15,12 +15,15 @@ audio_file_name = configParser.get(const.CFG_AUDIO_DIR, const.CFG_AUDIO_FILE_NAM
 
 class Event(LoggingEventHandler):
     def on_created(self, event):
-        print("Triggering speech to text ...")
-        time.sleep(1)
-        main.start()
-        print("Deleting the recording file ...")
-        audio_file_path = os.path.join(audio_path, audio_file_name)
-        os.remove(audio_file_path)
+        try:
+            print("Triggering speech to text ...")
+            time.sleep(1)
+            main.start()
+            print("Deleting the recording file ...")
+            audio_file_path = os.path.join(audio_path, audio_file_name)
+            os.remove(audio_file_path)
+        except:
+            print("An error ocurred while translating speech to text.")
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
@@ -30,6 +33,7 @@ if __name__ == "__main__":
     path = audio_path
     event_handler = Event()
     observer = Observer()
+    print("Listening ...")
     observer.schedule(event_handler, path, recursive=True)
     observer.start()
     try:

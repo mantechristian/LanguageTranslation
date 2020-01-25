@@ -15,6 +15,11 @@ speechrecognition = "*"
 pyaudio = {path = "./PyAudio-0.2.11-cp37-cp37m-win_amd64.whl"}
 googletrans = "*"
 setuptools = "*"
+watchdog = "*"
+flask = "*"
+scipy = "*"
+numpy = "*"
+sounddevice = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.7.3"
