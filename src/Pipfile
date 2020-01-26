@@ -12,7 +12,6 @@ wave = "*"
 configparser = "*"
 auto-py-to-exe = "*"
 speechrecognition = "*"
-pyaudio = {path = "./PyAudio-0.2.11-cp37-cp37m-win_amd64.whl"}
 googletrans = "*"
 setuptools = "*"
 watchdog = "*"
@@ -20,6 +19,8 @@ flask = "*"
 scipy = "*"
 numpy = "*"
 sounddevice = "*"
+pynput = "*"
+pyaudio = {path = "./PyAudio-0.2.11-cp37-cp37m-win_amd64.whl"}
 
 [requires]
 python_version = "3.7.3"

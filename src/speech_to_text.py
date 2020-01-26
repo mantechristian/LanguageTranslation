@@ -70,6 +70,7 @@ class SpeechToText:
         res = {}
         audio_data = sr.AudioFile(os.path.abspath(self.audio_path) + const.CHANGE_DIR + self.audio_file_name)
         with audio_data as source:
+            recognizer.adjust_for_ambient_noise(source)
             audio = recognizer.record(source)
             for langModel in const.AUDIO_LANG_BASE_LANG_LIST_GOOGLE:
                 result = recognizer.recognize_google(audio, language = langModel, show_all=True)
@@ -84,6 +85,8 @@ class SpeechToText:
                 transcriptList.append(transcript)
         
         langIdx = confidenceList.index(max(confidenceList))
+        if all(intConfidence == 0 for intConfidence in confidenceList):
+            return "none", "none"
         baseLanguage = const.AUDIO_LANG_BASE_LANG_LIST[langIdx]
         transcript = transcriptList[langIdx]
         extracted_text = transcript
