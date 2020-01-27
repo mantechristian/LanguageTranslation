@@ -68,7 +68,7 @@ class SpeechToText:
         recognizer = sr.Recognizer()
         mic = sr.Microphone()
         res = {}
-        audio_data = sr.AudioFile(os.path.abspath(self.audio_path) + const.CHANGE_DIR + self.audio_file_name)
+        audio_data = sr.AudioFile(os.path.join(self.audio_path, self.audio_file_name))
         with audio_data as source:
             recognizer.adjust_for_ambient_noise(source)
             audio = recognizer.record(source)
