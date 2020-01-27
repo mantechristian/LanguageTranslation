@@ -70,7 +70,7 @@ class SpeechToText:
         res = {}
         audio_data = sr.AudioFile(os.path.join(self.audio_path, self.audio_file_name))
         with audio_data as source:
-            recognizer.adjust_for_ambient_noise(source)
+            # recognizer.adjust_for_ambient_noise(source)
             audio = recognizer.record(source)
             for langModel in const.AUDIO_LANG_BASE_LANG_LIST_GOOGLE:
                 result = recognizer.recognize_google(audio, language = langModel, show_all=True)
