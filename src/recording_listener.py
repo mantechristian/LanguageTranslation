@@ -13,30 +13,48 @@ configParser = configparser.ConfigParser()
 configParser.read(const.CONFIG_FILE_NAME)
 audio_path = configParser.get(const.CFG_AUDIO_DIR, const.CFG_AUDIO_PATH)
 audio_file_name = configParser.get(const.CFG_AUDIO_DIR, const.CFG_AUDIO_FILE_NAME)
+audio_file_path = os.path.join(audio_path, audio_file_name)
+tempFileName = 'temp.wav'
+tempFilePath = os.path.join(audio_path, tempFileName)
 
 class Event(LoggingEventHandler):
     def on_created(self, event):
-        audio_file_path = os.path.join(audio_path, audio_file_name)
         try:
-            print("Triggering speech to text ...")
-            time.sleep(1)
-            start_time = time.time()
-            extracted_speech, baseLanguage = SpeechToText().start_speech_to_text()
-            if baseLanguage == "none":
-                print("Invalid Language")
-                return
-            else:
-                translated_text = LanguageTranslation().start_translation(extracted_speech, baseLanguage)
-                print(translated_text)
-                print("--- TOTAL execution time: %s seconds ---" % (time.time() - start_time))
-                print("Deleting the recording file ...")
-                os.remove(audio_file_path)
+            if event.src_path.endswith(audio_file_path):
+               self.startSpeechToText()
         except Exception as e:
             print(e)
             print("An error ocurred while translating speech to text.")
         finally:
             if os.path.isfile(audio_file_path):
                 os.remove(audio_file_path)
+    
+    def on_moved(self, event):
+        try:
+            print("PATH:" + event.src_path)
+            if event.src_path.endswith(tempFilePath):
+                self.startSpeechToText()
+        except Exception as e:
+            print(e)
+            print("An error ocurred while translating speech to text.")
+        finally:
+            if os.path.isfile(audio_file_path):
+                os.remove(audio_file_path)
+    
+    def startSpeechToText(self):
+        print("Triggering speech to text ...")
+        time.sleep(1)
+        start_time = time.time()
+        extracted_speech, baseLanguage = SpeechToText().start_speech_to_text()
+        if baseLanguage == "none":
+            print("Invalid Language")
+            return
+        else:
+            translated_text = LanguageTranslation().start_translation(extracted_speech, baseLanguage)
+            print(translated_text)
+            print("--- TOTAL execution time: %s seconds ---" % (time.time() - start_time))
+            print("Deleting the recording file ...")
+            os.remove(audio_file_path)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO,
@@ -46,7 +64,7 @@ if __name__ == "__main__":
     path = audio_path
     event_handler = Event()
     observer = Observer()
-    print("Listening ...")
+    print("\nDirectory Listener is listening...")
     observer.schedule(event_handler, path, recursive=True)
     observer.start()
     try:
