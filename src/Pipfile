@@ -21,6 +21,7 @@ numpy = "*"
 sounddevice = "*"
 pynput = "*"
 pyaudio = {path = "./PyAudio-0.2.11-cp37-cp37m-win_amd64.whl"}
+soundfile = "*"
 
 [requires]
 python_version = "3.7.3"
