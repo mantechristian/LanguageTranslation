@@ -1,4 +1,4 @@
 # Language Translation using Python Libraries
-## sounddevice
-## SpeechRecognition
-## googletrans
+#### sounddevice
+#### SpeechRecognition
+#### googletrans
