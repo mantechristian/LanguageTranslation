@@ -1,4 +1,1 @@
-# Language Translation using Python Libraries
-#### sounddevice
-#### SpeechRecognition
-#### googletrans
+# Basic Language recording and text translation using SoundDevice, SpeechRecognition, and googletrans libraries.
